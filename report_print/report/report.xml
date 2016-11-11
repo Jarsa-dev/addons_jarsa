@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_purchase">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <h2>Purchase Orders</h2>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>Reference</strong>
+                                </th>
+                                <th>
+                                    <strong>Vendor</strong>
+                                </th>
+                                <th class="text-center">
+                                    <strong>Date Order</strong>
+                                </th>
+                                <th class="text-right">
+                                    <strong>Untaxed</strong>
+                                </th>
+                                <th class="text-right">
+                                    <strong>Total</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-as="line" t-foreach="docs">
+                                <td>
+                                    <span t-field="line.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line.partner_id.name"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="line.date_order"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="line.amount_tax"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="line.amount_total"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4">Sum</th>
+                                <td>
+                                    <span t-esc="sum(x.amount_total for x in docs)"/>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+        <template id="report_purchase_translate">
+            <t t-call="report.html_container">
+                <t t-as="doc_id" t-foreach="doc_ids">
+                    <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'report_print.report_purchase')"/>
+                </t>
+            </t>
+        </template>
+        <report file="report_print.report_purchase" id="print_report_purchase" model="purchase.order" name="report_print.report_purchase" report_type="qweb-pdf" string="Report Purchase"/>
+    </data>
+</openerp>

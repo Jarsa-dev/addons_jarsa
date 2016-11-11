@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_report_sale" model="ir.ui.view">
+            <field name="name">Create Report Purchase</field>
+            <field name="model">wizard.purchase.report</field>
+            <field name="arch" type="xml">
+                <form version="9.0">
+                    <sheet>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_report_purchase" string="Print Report" type="object"/>
+                        <button class="oe_link" special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_report_purchase_special" model="ir.actions.act_window">
+            <field name="name">Purchase Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.purchase.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    <menuitem action="action_report_purchase_special" id="report_purchase_special" parent="base.purchase_report"/>
+    </data>
+</odoo>
