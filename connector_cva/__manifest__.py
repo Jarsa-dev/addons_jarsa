@@ -5,7 +5,7 @@
     "name": "Connector CVA",
     "summary": "Module to sync with CVA web-services",
     "license": "AGPL-3",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Jarsa Sistemas, S.A. de C.V.",
     "website": "http://www.jarsa.com.mx",
     "category": "connector",
